@@ -36,4 +36,4 @@ jobs:
       # 4: run test command
       - name: Run test command
         run: npm run test
-        working-directory: REACT/min-handleliste
+        working-directory: frontend/min-handleliste
