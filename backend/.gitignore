@@ -1,3 +1,6 @@
+# firestore secret
+service_account_pk.json
+
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
