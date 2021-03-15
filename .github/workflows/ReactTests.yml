@@ -31,9 +31,9 @@ jobs:
       # 3: install NPM dependencies
       - name: Install dependencies
         run: npm install
-        working-directory: frontend/min-handleliste
+        working-directory: backend/frontend
       
       # 4: run test command
       - name: Run test command
         run: npm run test
-        working-directory: frontend/min-handleliste
+        working-directory: backend/frontend
