@@ -1,4 +1,4 @@
-package no.hvl.dat250.backend;
+package no.hvl.dat251.backend;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
