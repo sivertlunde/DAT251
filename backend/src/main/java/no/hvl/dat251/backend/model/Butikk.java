@@ -1,4 +1,4 @@
-package no.hvl.dat251.backend;
+package no.hvl.dat251.backend.model;
 
 public class Butikk {
 	private String navn;
