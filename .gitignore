@@ -23,6 +23,9 @@
 hs_err_pid*
 /.metadata/
 
+# Derby
+backend/derbydb/
+backend/derby/
 
 mock_data/dat251-firebase-adminsdk-h77n5-de5d8744ea.json
 mock_data/node_modules/
