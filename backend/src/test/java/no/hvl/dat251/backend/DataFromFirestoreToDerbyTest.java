@@ -18,32 +18,39 @@ import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 
 public class DataFromFirestoreToDerbyTest {
-	List<PorduktDirectory> firebaseproducts = new ArrayList<>();
-	private ProductDirectory dir;
+	List<ProductDirectory> firebaseproducts = new ArrayList<>();
+	private ProductDirectory dir1;
+	private ProductDirectory dir2;
+	private ProductDirectory dir3;
 	
 	
 	
 	@BeforeEach
 	public void setup() {
-		Map<String,String> product = new HashMap<String,String>();
-		product.put("eple", "id1");
-		firebaseproducts.add(product);
-		product.put("agurk", "id2");
-		firebaseproducts.add(product);
-		product.put("egg", "id3");
-		firebaseproducts.add(product);
+		dir1 = new ProductDirectory("eple","id1");
+		firebaseproducts.add(dir1);
+		dir2 = new ProductDirectory("agurk", "id2");
+		firebaseproducts.add(dir2);
+		dir3 = new ProductDirectory("egg", "id3");
+		firebaseproducts.add(dir3);
 		
 		
 	}
 	
 	@Test
 	public void fromListToString() {
-		String result;
+		String result = "";
+		if(!firebaseproducts.isEmpty()) {
 		
-		for(Map<String,String> map : firebaseproducts) {
-			result = result + "( '" + map. + "', '" + tab.toString() +"')");
+			for(ProductDirectory dir : firebaseproducts) {
+				result = result + "( '" + dir.getId() + "', '" + dir.getName() +"')";	
+			}
 			
 		}
+		
+		
+		
+		
 		
 		
 	}
