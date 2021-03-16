@@ -11,6 +11,10 @@ public class Bruker {
 	private List<Produkt> favoritter;
 	private List<Produkt> svarteliste;
 	
+	public Bruker() {
+		
+	}
+	
 	public Bruker(String id, String email, String passord, String addresse) {
 		this.id = id;
 		this.email = email;

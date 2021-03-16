@@ -1,16 +1,20 @@
 package no.hvl.dat251.backend.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 public class Handleliste {
 	private String id;
-	private Date dato;
+	private LocalDateTime dato;
 	private List<Map<Produkt, Integer>> produkter;
 	
-	public Handleliste(String id, Date dato, List<Map<Produkt, Integer>> produkter) {
+	public Handleliste() {
+		
+	}
+	
+	public Handleliste(String id, LocalDateTime dato, List<Map<Produkt, Integer>> produkter) {
 		this.id = id;
 		this.dato = dato;
 		this.produkter = new ArrayList<Map<Produkt, Integer>>();
@@ -44,11 +48,11 @@ public class Handleliste {
 		this.id = id;
 	}
 
-	public Date getDato() {
+	public LocalDateTime getDato() {
 		return dato;
 	}
 
-	public void setDato(Date dato) {
+	public void setDato(LocalDateTime dato) {
 		this.dato = dato;
 	}
 
