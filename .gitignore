@@ -22,3 +22,7 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 /.metadata/
+
+
+mock_data/dat251-firebase-adminsdk-h77n5-de5d8744ea.json
+mock_data/node_modules/
