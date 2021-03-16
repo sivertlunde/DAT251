@@ -26,7 +26,7 @@ class TimeTest extends React.Component {
                 <h1 className="App-title">{this.state.message}</h1>
                 <p>
                     Edit <code>src/App.js</code> and save to reload. You should be able to see the changes straight away.
-            </p>
+        </p>
                 <a
                     className="App-link"
                     href="https://reactjs.org"
@@ -34,7 +34,10 @@ class TimeTest extends React.Component {
                     rel="noopener noreferrer"
                 >
                     Learn React
-            </a>
+        </a>
+                <button onClick={this.activateLasers}>
+                    Activate Lasers
+        </button>
             </header>
         );
     }
