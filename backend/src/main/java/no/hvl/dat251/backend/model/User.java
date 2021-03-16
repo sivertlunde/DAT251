@@ -2,20 +2,20 @@ package no.hvl.dat251.backend.model;
 
 import java.util.List;
 
-public class Bruker {
+public class User {
 	private String id;
 	private String email;
 	private String passord;
 	private String addresse;
-	private Handleliste tidligereLister;
-	private List<Produkt> favoritter;
-	private List<Produkt> svarteliste;
+	private ShoppingList tidligereLister;
+	private List<Product> favoritter;
+	private List<Product> svarteliste;
 	
-	public Bruker() {
+	public User() {
 		
 	}
 	
-	public Bruker(String id, String email, String passord, String addresse) {
+	public User(String id, String email, String passord, String addresse) {
 		this.id = id;
 		this.email = email;
 		this.passord = passord;
@@ -54,27 +54,27 @@ public class Bruker {
 		this.addresse = addresse;
 	}
 
-	public Handleliste getTidligereLister() {
+	public ShoppingList getTidligereLister() {
 		return tidligereLister;
 	}
 
-	public void setTidligereLister(Handleliste tidligereLister) {
+	public void setTidligereLister(ShoppingList tidligereLister) {
 		this.tidligereLister = tidligereLister;
 	}
 
-	public List<Produkt> getFavoritter() {
+	public List<Product> getFavoritter() {
 		return favoritter;
 	}
 
-	public void setFavoritter(List<Produkt> favoritter) {
+	public void setFavoritter(List<Product> favoritter) {
 		this.favoritter = favoritter;
 	}
 
-	public List<Produkt> getSvarteliste() {
+	public List<Product> getSvarteliste() {
 		return svarteliste;
 	}
 
-	public void setSvarteliste(List<Produkt> svarteliste) {
+	public void setSvarteliste(List<Product> svarteliste) {
 		this.svarteliste = svarteliste;
 	}	
 }

@@ -2,18 +2,18 @@ package no.hvl.dat251.backend.model;
 
 import java.util.*;
 
-public class Produkt {
+public class Product {
 	private String id;
 	private String navn;
 	private Map<String, Double> butikkPris;
 	private double vekt;
 	private String kategori;
 	
-	public Produkt() {
+	public Product() {
 		
 	}
 	
-	public Produkt(String id, String navn, Map<String, Double> butikkPris, double vekt, String kategori) {
+	public Product(String id, String navn, Map<String, Double> butikkPris, double vekt, String kategori) {
 		this.id = id;
 		this.navn = navn;
 		butikkPris = new HashMap<String, Double>();
