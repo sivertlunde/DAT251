@@ -43,7 +43,7 @@ class App extends Component {
           >
             Learn React
         </a>
-        <button onClick={activateLasers}>
+        <button onClick={this.activateLasers}>
           Activate Lasers
         </button>
         </header>
