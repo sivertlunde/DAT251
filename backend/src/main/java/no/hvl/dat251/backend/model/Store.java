@@ -1,14 +1,14 @@
 package no.hvl.dat251.backend.model;
 
-public class Butikk {
+public class Store {
 	private String navn;
 	private String url;
 	
-	public Butikk() {
+	public Store() {
 		
 	}
 	
-	public Butikk(String navn, String url) {
+	public Store(String navn, String url) {
 		this.navn = navn;
 		this.url = url;
 	}

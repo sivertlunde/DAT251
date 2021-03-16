@@ -5,26 +5,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Handleliste {
+public class ShoppingList {
 	private String id;
 	private LocalDateTime dato;
-	private List<Map<Produkt, Integer>> produkter;
+	private List<Map<Product, Integer>> produkter;
 	
-	public Handleliste() {
+	public ShoppingList() {
 		
 	}
 	
-	public Handleliste(String id, LocalDateTime dato, List<Map<Produkt, Integer>> produkter) {
+	public ShoppingList(String id, LocalDateTime dato, List<Map<Product, Integer>> produkter) {
 		this.id = id;
 		this.dato = dato;
-		this.produkter = new ArrayList<Map<Produkt, Integer>>();
+		this.produkter = new ArrayList<Map<Product, Integer>>();
 	}
 	
-	public void leggTil(Produkt produkt) {
+	public void leggTil(Product produkt) {
 		
 	}
 	
-	public Produkt slett(Produkt produkt) {
+	public Product slett(Product produkt) {
 		return null;
 	}
 	
@@ -56,11 +56,11 @@ public class Handleliste {
 		this.dato = dato;
 	}
 
-	public List<Map<Produkt, Integer>> getProdukter() {
+	public List<Map<Product, Integer>> getProdukter() {
 		return produkter;
 	}
 
-	public void setProdukter(List<Map<Produkt, Integer>> produkter) {
+	public void setProdukter(List<Map<Product, Integer>> produkter) {
 		this.produkter = produkter;
 	}
 }
