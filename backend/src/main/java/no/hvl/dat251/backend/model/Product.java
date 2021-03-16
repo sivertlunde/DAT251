@@ -4,45 +4,21 @@ import java.util.*;
 
 public class Product {
 	private String id;
-	private String navn;
-	private Map<String, Double> butikkPris;
-	private double vekt;
-	private String kategori;
+	private String name;
+	private Map<String, Double> storePrice;
+	private double weight;
+	private String category;
 	
 	public Product() {
 		
 	}
 	
-	public Product(String id, String navn, Map<String, Double> butikkPris, double vekt, String kategori) {
+	public Product(String id, String name, Map<String, Double> storePrice, double weight, String category) {
 		this.id = id;
-		this.navn = navn;
-		butikkPris = new HashMap<String, Double>();
-		this.vekt = vekt;
-		this.kategori = kategori;
-	}
-
-	public String getNavn() {
-		return navn;
-	}
-
-	public void setNavn(String navn) {
-		this.navn = navn;
-	}
-
-	public Map<String, Double> getButikkPris() {
-		return butikkPris;
-	}
-
-	public void setButikkPris(Map<String, Double> butikkPris) {
-		this.butikkPris = butikkPris;
-	}
-
-	public double getVekt() {
-		return vekt;
-	}
-
-	public void setVekt(double vekt) {
-		this.vekt = vekt;
+		this.name = name;
+		storePrice = new HashMap<String, Double>();
+		this.weight = weight;
+		this.category = category;
 	}
 
 	public String getId() {
@@ -53,12 +29,35 @@ public class Product {
 		this.id = id;
 	}
 
-	public String getKategori() {
-		return kategori;
+	public String getName() {
+		return name;
 	}
 
-	public void setKategori(String kategori) {
-		this.kategori = kategori;
+	public void setName(String name) {
+		this.name = name;
 	}
 
+	public Map<String, Double> getStorePrice() {
+		return storePrice;
+	}
+
+	public void setStorePrice(Map<String, Double> storePrice) {
+		this.storePrice = storePrice;
+	}
+
+	public double getWeight() {
+		return weight;
+	}
+
+	public void setWeight(double weight) {
+		this.weight = weight;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
 }
