@@ -23,7 +23,7 @@ public class ProduktDirectoryController {
 	public String url ="jdbc:derby:derbydb";
 	
 	
-	@GetMapping("/productDirectories")
+	@GetMapping("/api/productDirectories")
 	public ResponseEntity<List<ProduktDirectory>> getAllProducts ()  {
 		
 		//DerbyConnectionSetup dbsetup = new DerbyConnectionSetup(url);

@@ -18,6 +18,14 @@ class App extends Component {
       });
   };
 
+  activateLasers = () => {
+    fetch('/api/productDirectories')
+    .then(response => response.text())
+    .then(message => {
+      console.log(message);
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -35,6 +43,9 @@ class App extends Component {
           >
             Learn React
         </a>
+        <button onClick={activateLasers}>
+          Activate Lasers
+        </button>
         </header>
       </div>
     );
