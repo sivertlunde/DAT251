@@ -9,7 +9,11 @@ public class Produkt {
 	private double vekt;
 	private String kategori;
 	
-	public Produkt(String id, String navn, double pris, Map<String, Double> butikkPris, double vekt, String kategori) {
+	public Produkt() {
+		
+	}
+	
+	public Produkt(String id, String navn, Map<String, Double> butikkPris, double vekt, String kategori) {
 		this.id = id;
 		this.navn = navn;
 		butikkPris = new HashMap<String, Double>();
