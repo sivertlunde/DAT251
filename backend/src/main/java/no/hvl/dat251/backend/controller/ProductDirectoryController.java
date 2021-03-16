@@ -11,24 +11,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import no.hvl.dat251.backend.model.ProduktDirectory;
-import no.hvl.dat251.backend.repository.ProduktDirectoryRepository;
+import no.hvl.dat251.backend.model.ProductDirectory;
+import no.hvl.dat251.backend.repository.ProductDirectoryRepository;
 
 @RestController
-public class ProduktDirectoryController {
+public class ProductDirectoryController {
 
 	@Autowired
-	ProduktDirectoryRepository directoryRepository;
+	ProductDirectoryRepository directoryRepository;
 	public String url ="jdbc:derby:derbydb";
 	
 	
 	@GetMapping("/api/productDirectories")
-	public ResponseEntity<List<ProduktDirectory>> getAllProducts ()  {
+	public ResponseEntity<List<ProductDirectory>> getAllProducts ()  {
 		
 		//DerbyConnectionSetup dbsetup = new DerbyConnectionSetup(url);
 		//Connection conn = dbsetup.setupConnection(url);
 		try {
-			List<ProduktDirectory> dirs = new ArrayList<ProduktDirectory>();
+			List<ProductDirectory> dirs = new ArrayList<ProductDirectory>();
 			
 			directoryRepository.findAll().forEach(dirs::add);
 			
