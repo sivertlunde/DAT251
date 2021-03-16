@@ -27,6 +27,9 @@ public class BackendApplication {
 			
 			pr.save(item);
 			
+			System.out.println(pr.findAll());
+			
+			
 
 		};
 	}
