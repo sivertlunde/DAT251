@@ -15,11 +15,9 @@ public class User {
 		
 	}
 	
-	public User(String id, String email, String password, String address) {
+	public User(String id, String email) {
 		this.id = id;
 		this.email = email;
-		this.password = password;
-		this.address = address;
 	}
 
 	public String getId() {
