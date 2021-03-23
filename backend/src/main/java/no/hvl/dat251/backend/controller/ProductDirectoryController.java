@@ -11,11 +11,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.cloud.firestore.QueryDocumentSnapshot;
+
+import no.hvl.dat251.backend.firestore.FirestoreUtil;
 import no.hvl.dat251.backend.model.ProductDirectory;
 import no.hvl.dat251.backend.repository.ProductDirectoryRepository;
 
 @RestController
 public class ProductDirectoryController {
+	
+	FirestoreUtil firestoreutil;
+	
+	public ProductDirectoryController(FirestoreUtil firestoreutil) {
+		this.firestoreutil = firestoreutil;
+	}
 
 	@Autowired
 	ProductDirectoryRepository directoryRepository;
@@ -42,6 +51,38 @@ public class ProductDirectoryController {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+
+
+	public String sqlStmtFromData(List<ProductDirectory> firebaseproducts) {
+		// TODO Auto-generated method stub
+		String result ="";
+		if(!firebaseproducts.isEmpty()) {
+			for(int i =0; i<firebaseproducts.size(); i++ ) {
+				if(i==firebaseproducts.size()-1) {
+					result = result + "( '" + firebaseproducts.get(i).getId() + "', '" + firebaseproducts.get(i).getName() +"');";
+				}else {
+					result = result + "( '" + firebaseproducts.get(i).getId() + "', '" + firebaseproducts.get(i).getName() +"'),";	
+				}
+			}
+			
+		}
+		
+		return result;
+		
+	}
+
+
+	public List<ProductDirectory> dataToList(List<QueryDocumentSnapshot> documents) {
+		// TODO Auto-generated method stub
+		List<ProductDirectory> pdlist = new ArrayList<>();
+		for(QueryDocumentSnapshot document : documents) {
+			pdlist.add(new ProductDirectory(document.getId(), document.get("name").toString()));
+		}
+		
+		return pdlist;
+	}
+	
+	
 	
 	
 }

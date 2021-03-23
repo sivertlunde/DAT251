@@ -15,9 +15,9 @@ public class ProductDirectory {
 		
 	}
 	
-	public ProductDirectory(String name, String id) {
-		this.name = name;
+	public ProductDirectory(String id, String name) {
 		this.id=id;
+		this.name = name;
 	}
 
 
