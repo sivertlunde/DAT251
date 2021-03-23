@@ -56,9 +56,10 @@ class ShoppingList extends React.Component {
                                     <td>Produktnavn</td>
                                     {
                                         shopNames.map(shopName => {
-                                            return <td><img width="60" src={"/shopLogos/"+shopName+".png"}></img></td>;
+                                            return <td><img width="60" src={"/shopLogos/" + shopName + ".png"}></img></td>;
                                         })
                                     }
+                                    <td></td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -68,9 +69,16 @@ class ShoppingList extends React.Component {
                                             return (
                                                 <tr key={product.name}>
                                                     <td> {product.name}</td>
-                                                    {shopNames.map( shopName => {
-                                                        return (<td>{product.prices[shopName]}</td>);
-                                                    })}
+                                                    {
+                                                        shopNames.map(shopName => {
+                                                            return (<td>{product.prices[shopName]}</td>);
+                                                        })
+                                                    }
+                                                    <td><button className="btn btn-danger btn-sm" onClick={() => {
+                                                        this.setState({shoppingList: this.state.shoppingList.filter( event => event.name !== product.name)}) 
+                                                    }
+
+                                                    }>-</button></td>
                                                 </tr>
                                             )
                                         })
@@ -82,11 +90,12 @@ class ShoppingList extends React.Component {
                                 <tr >
                                     <td> Sum: </td>
                                     {
-                                    // finds the sum of products for each shop
-                                    shopNames.map(shopName => {
-                                        return (<td> {sum(shopName, this.state.shoppingList)}</td>);
-                                    })
+                                        // finds the sum of products for each shop
+                                        shopNames.map(shopName => {
+                                            return (<td> {sum(shopName, this.state.shoppingList)}</td>);
+                                        })
                                     }
+                                    <td></td>
                                 </tr>
                             </tfoot>
                         </table>
