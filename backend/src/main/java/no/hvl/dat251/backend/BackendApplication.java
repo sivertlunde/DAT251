@@ -23,7 +23,7 @@ public class BackendApplication {
 		return (args) -> {
 			// save a few entities
 			
-			ProductDirectory item = new ProductDirectory("banan", "idher");
+			ProductDirectory item = new ProductDirectory("Sorrel - Fresh", "04lqa16zHxKbUXXTeyG9");
 			
 			pr.save(item);
 			
