@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 
 import no.hvl.dat251.backend.firestore.FirebaseInitializer;
+import no.hvl.dat251.backend.firestore.FirestoreConfig;
 import no.hvl.dat251.backend.firestore.FirestoreUtil;
 import no.hvl.dat251.backend.model.ProductDirectory;
 import no.hvl.dat251.backend.repository.ProductDirectoryRepository;
@@ -27,12 +28,12 @@ public class ProductDirectoryController {
 	FirestoreUtil firestoreutil;
 	
 	@Autowired
-	FirebaseInitializer init;
+	FirestoreConfig config;
 	
-//	public ProductDirectoryController(FirestoreUtil firestoreutil, FirebaseInitializer init) {
-//		this.firestoreutil = firestoreutil;
-//		this.init = init;
-//	}
+	public ProductDirectoryController(FirestoreUtil firestoreutil, FirestoreConfig config) {
+		this.firestoreutil = firestoreutil;
+		this.config = config;
+	}
 
 	@Autowired
 	ProductDirectoryRepository directoryRepository;
