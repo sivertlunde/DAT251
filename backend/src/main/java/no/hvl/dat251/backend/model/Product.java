@@ -16,7 +16,7 @@ public class Product {
 	public Product(String id, String name, Map<String, Double> storePrice, double weight, String category) {
 		this.id = id;
 		this.name = name;
-		storePrice = new HashMap<String, Double>();
+		this.storePrice = storePrice;
 		this.weight = weight;
 		this.category = category;
 	}

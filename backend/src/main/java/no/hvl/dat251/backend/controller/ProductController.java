@@ -25,13 +25,13 @@ import no.hvl.dat251.backend.repository.ProductDirectoryRepository;
 public class ProductController {
 	
 	@Autowired
-	FirebaseInitializer firebase;
+	Firestore firestore;
 	
 	@Autowired
 	ProductDirectoryRepository pdRepo;
 		
-	public ProductController(FirebaseInitializer firebase, ProductDirectoryRepository pdRepo) {
-		this.firebase = firebase;
+	public ProductController(Firestore firestore, ProductDirectoryRepository pdRepo) {
+		this.firestore = firestore;
 		this.pdRepo = pdRepo;
 	}
 
@@ -39,7 +39,6 @@ public class ProductController {
     public List<Product> getProducts(@PathVariable("name") String name) {
 		List<Product> productList = new ArrayList<>();
 		try {
-			Firestore firestore = firebase.getDatabase();
 	        ApiFuture<List<DocumentSnapshot>> productSnapshots = firestore.getAll(makeDocumentReferences(name));
 	        List<DocumentSnapshot> snapshotList = productSnapshots.get();
 			for (DocumentSnapshot ds : snapshotList) {
@@ -54,24 +53,16 @@ public class ProductController {
 		} catch (ExecutionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
         return productList;
     }
 
 	public DocumentReference[] makeDocumentReferences(String string) {
 		List<DocumentReference> drList = new ArrayList<>();
-		try {
-			List<ProductDirectory> pdList = pdRepo.findByNameContaining(string);
-			for (ProductDirectory pd : pdList) {
-				DocumentReference dr = firebase.getDatabase().collection("products").document(pd.getId());
-				drList.add(dr);
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		List<ProductDirectory> pdList = pdRepo.findByNameContaining(string);
+		for (ProductDirectory pd : pdList) {
+			DocumentReference dr = firestore.collection("products").document(pd.getId());
+			drList.add(dr);
 		}
 		DocumentReference[] drTable = new DocumentReference[drList.size()];
 		for (int i = 0; i < drList.size(); i++) {
