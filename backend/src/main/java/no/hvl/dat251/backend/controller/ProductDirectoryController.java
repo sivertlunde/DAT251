@@ -22,6 +22,7 @@ import no.hvl.dat251.backend.repository.ProductDirectoryRepository;
 @RestController
 public class ProductDirectoryController {
 	
+	@Autowired
 	FirestoreUtil firestoreutil;
 	
 	public ProductDirectoryController(FirestoreUtil firestoreutil) {
