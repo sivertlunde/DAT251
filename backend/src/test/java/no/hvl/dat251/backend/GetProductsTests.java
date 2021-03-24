@@ -37,7 +37,6 @@ import no.hvl.dat251.backend.repository.ProductDirectoryRepository;
 public class GetProductsTests {
 
 	 @Mock private ProductDirectoryRepository mockedPDRepo;
-	 @Mock private FirebaseInitializer firebaseInit;
 	 @Mock private Firestore mockedFirestore;
 	 @Mock private CollectionReference mockedCR;
 	 @Mock private DocumentReference dr1;
@@ -52,7 +51,7 @@ public class GetProductsTests {
 	 
 	 @BeforeEach
 	 public void setup() {
-		 pc = new ProductController(firebaseInit, mockedPDRepo);
+		 pc = new ProductController(mockedFirestore, mockedPDRepo);
 		 pdList = new ArrayList<>();
 		 pd1 = new ProductDirectory("", "");
 		 pd2 = new ProductDirectory("", "");
@@ -64,7 +63,6 @@ public class GetProductsTests {
 	 
 	 @Test
 	 public void controllerMakesDocumentReferencesFromDB() throws IOException {
-		 when(firebaseInit.getDatabase()).thenReturn(mockedFirestore);
 		 when(dr1.getId()).thenReturn("1");
 		 when(dr2.getId()).thenReturn("2");
 		 when(dr3.getId()).thenReturn("3");
@@ -77,8 +75,8 @@ public class GetProductsTests {
 		 assertEquals("3", actualDRTable[2].getId());
 	 }
 	 
-	 @Test
-	 public void unnamedTest() {
-		 
-	 }
+//	 @Test
+//	 public void unnamedTest() {
+//		 
+//	 }
 }

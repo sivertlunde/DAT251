@@ -47,7 +47,7 @@ public class DomainModelTests {
 		LocalDateTime date = LocalDateTime.now();
 		
 		butikk = new Store("Spar", "https://spar.no/");
-		bruker = new User("123", "test@gmail.com", "passord123", "testvegen 123");
+//		bruker = new User("123", "test@gmail.com", "passord123", "testvegen 123");
 		produkt = new Product("1", "Agurk", produktButikkOgPris, 1.75, "Gronnsaker");
 		handleliste = new ShoppingList("1", date, produkter);
 	}
