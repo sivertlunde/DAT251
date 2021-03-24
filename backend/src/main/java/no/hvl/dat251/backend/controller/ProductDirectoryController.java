@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 
+import no.hvl.dat251.backend.firestore.FirebaseInitializer;
 import no.hvl.dat251.backend.firestore.FirestoreUtil;
 import no.hvl.dat251.backend.model.ProductDirectory;
 import no.hvl.dat251.backend.repository.ProductDirectoryRepository;
@@ -25,12 +26,17 @@ public class ProductDirectoryController {
 	@Autowired
 	FirestoreUtil firestoreutil;
 	
-	public ProductDirectoryController(FirestoreUtil firestoreutil) {
-		this.firestoreutil = firestoreutil;
-	}
+	@Autowired
+	FirebaseInitializer init;
+	
+//	public ProductDirectoryController(FirestoreUtil firestoreutil, FirebaseInitializer init) {
+//		this.firestoreutil = firestoreutil;
+//		this.init = init;
+//	}
 
 	@Autowired
 	ProductDirectoryRepository directoryRepository;
+	
 	public String url ="jdbc:derby:derbydb";
 	
 	
