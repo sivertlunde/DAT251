@@ -16,4 +16,9 @@ public class FirestoreConfig {
     public Firestore getDb() {
         return FirestoreClient.getFirestore();
     }
+    
+    @Bean
+    public FirebaseAuth getAuth() throws IOException {
+ 		return FirebaseAuth.getInstance();
+ 	}
 }
