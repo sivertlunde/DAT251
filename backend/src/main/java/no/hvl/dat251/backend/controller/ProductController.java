@@ -25,12 +25,16 @@ import no.hvl.dat251.backend.repository.ProductDirectoryRepository;
 public class ProductController {
 	
 	@Autowired
+	FirebaseInitializer firebase;
+	
+	@Autowired
 	Firestore firestore;
 	
 	@Autowired
 	ProductDirectoryRepository pdRepo;
 		
-	public ProductController(Firestore firestore, ProductDirectoryRepository pdRepo) {
+	public ProductController(FirebaseInitializer firebase, Firestore firestore, ProductDirectoryRepository pdRepo) {
+		this.firebase = firebase;
 		this.firestore = firestore;
 		this.pdRepo = pdRepo;
 	}
