@@ -1,8 +1,11 @@
 package no.hvl.dat251.backend;
 
 import no.hvl.dat251.backend.controller.ProductDirectoryController;
+import no.hvl.dat251.backend.firestore.FirestoreConfig;
 import no.hvl.dat251.backend.firestore.FirestoreUtil;
 import no.hvl.dat251.backend.model.*;
+import no.hvl.dat251.backend.repository.ProductDirectoryRepository;
+
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
@@ -36,17 +39,19 @@ import com.google.cloud.firestore.QuerySnapshot;
 @MockitoSettings(strictness = Strictness.LENIENT)
 
 public class DataFromFirestoreToDerbyTest {
-	List<ProductDirectory> firebaseproducts = new ArrayList<>();
-	List<QueryDocumentSnapshot> documentList = new ArrayList<>();
-	@Mock QueryDocumentSnapshot doc1;
-	@Mock QueryDocumentSnapshot doc2;
-	@Mock QueryDocumentSnapshot doc3;
+	private List<ProductDirectory> firebaseproducts = new ArrayList<>();
+	private List<QueryDocumentSnapshot> documentList = new ArrayList<>();
+	@Mock private QueryDocumentSnapshot doc1;
+	@Mock private QueryDocumentSnapshot doc2;
+	@Mock private QueryDocumentSnapshot doc3;
 	private ProductDirectory dir1;
 	private ProductDirectory dir2;
 	private ProductDirectory dir3;
-	@Mock FirestoreUtil firestoreutil;
+	@Mock private FirestoreUtil firestoreutil;
+	@Mock private FirestoreConfig config;
+	@Mock private ProductDirectoryRepository repo;
 	
-	private ProductDirectoryController pdc = new ProductDirectoryController(firestoreutil);
+	private ProductDirectoryController pdc;
 	
 	
 	
@@ -61,23 +66,24 @@ public class DataFromFirestoreToDerbyTest {
 		documentList.add(doc1);
 		documentList.add(doc2);
 		documentList.add(doc3);
+		pdc=  new ProductDirectoryController(firestoreutil, config, repo);
 		
 	}
 	
 	
-	@Test
-	public void fromListToString() {
-		when(doc1.getId()).thenReturn("id1");
-		when(doc2.getId()).thenReturn("id2");
-		when(doc3.getId()).thenReturn("id3");
-		when(doc1.get("name")).thenReturn("eple");
-		when(doc2.get("name")).thenReturn("agurk");
-		when(doc3.get("name")).thenReturn("egg");
-		String result = pdc.sqlStmtFromData(pdc.dataToList(documentList));
-		String expected = "( 'id1', 'eple'),( 'id2', 'agurk'),( 'id3', 'egg');";
-		assertEquals(expected, result);
-		
-	}
+//	@Test
+//	public void fromListToString() {
+//		when(doc1.getId()).thenReturn("id1");
+//		when(doc2.getId()).thenReturn("id2");
+//		when(doc3.getId()).thenReturn("id3");
+//		when(doc1.get("name")).thenReturn("eple");
+//		when(doc2.get("name")).thenReturn("agurk");
+//		when(doc3.get("name")).thenReturn("egg");
+//		String result = pdc.sqlStmtFromData(pdc.dataToList(documentList));
+//		String expected = "( 'id1', 'eple'),( 'id2', 'agurk'),( 'id3', 'egg');";
+//		assertEquals(expected, result);
+//		
+//	}
 	
 	@Test
 	public void turnFirebaseDataIntoListOfProductDirectories() {
@@ -101,18 +107,21 @@ public class DataFromFirestoreToDerbyTest {
 	
 	@Test
 	public void UpdateDatabaseWithNewProductDirectories() {
-		when(firestoreutil.getAllProducts()).thenReturn(documentList);
 		when(doc1.getId()).thenReturn("id1");
 		when(doc2.getId()).thenReturn("id2");
 		when(doc3.getId()).thenReturn("id3");
 		when(doc1.get("name")).thenReturn("eple");
 		when(doc2.get("name")).thenReturn("agurk");
 		when(doc3.get("name")).thenReturn("egg");
-		
-		
-		
-		
-		
+		when(firestoreutil.getAllProducts()).thenReturn(documentList);
+		pdc.replaceAll();
+		verify(repo, times(documentList.size())).save(any(ProductDirectory.class));
+	}
+	
+	@Test
+	public void deleteAllProductsInDatabase() {
+		pdc.deleteAllProducts();
+		verify(repo, times(1)).deleteAll();
 	}
 	
 	
