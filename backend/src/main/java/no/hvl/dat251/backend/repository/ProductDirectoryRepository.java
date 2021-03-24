@@ -10,10 +10,13 @@ import no.hvl.dat251.backend.model.ProductDirectory;
 
 public interface ProductDirectoryRepository extends CrudRepository<ProductDirectory, Long> {
 
-	@Modifying
-	@Query(
+	/*
+	 *@Modifying
+		@Query(
 		value= "CREATE TABLE IF NOT EXISTS 'products'(id VARCHAR(500), name VARCHAR(500)); INSERT INTO 'products' VALUES :statement",
-		nativeQuery= true)
-	void addAll(@Param("statement") String statement);
+		nativeQuery= true) 
+	 */
+	
+	//void addAll(@Param("statement") String statement);
 	
 }

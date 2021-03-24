@@ -7,7 +7,7 @@ import com.google.cloud.firestore.QueryDocumentSnapshot;
 public class FirestoreUtil {
 
 	public List<QueryDocumentSnapshot> getAllProducts() {
-		// TODO Auto-generated method stub
+		List<QueryDocumentSnapshot> result;
 		return null;
 	}
 

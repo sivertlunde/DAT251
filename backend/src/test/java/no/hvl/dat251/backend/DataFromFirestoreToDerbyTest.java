@@ -75,7 +75,7 @@ public class DataFromFirestoreToDerbyTest {
 		when(doc3.get("name")).thenReturn("egg");
 		String result = pdc.sqlStmtFromData(pdc.dataToList(documentList));
 		String expected = "( 'id1', 'eple'),( 'id2', 'agurk'),( 'id3', 'egg');";
-		assertEquals(result, expected);
+		assertEquals(expected, result);
 		
 	}
 	
@@ -90,12 +90,28 @@ public class DataFromFirestoreToDerbyTest {
 		when(doc3.get("name")).thenReturn("egg");
 		List<ProductDirectory> pd = pdc.dataToList(firestoreutil.getAllProducts());
 		
-		assertEquals(pd.get(0).getId(), "id1");
-		assertEquals(pd.get(0).getName(), "eple");
-		assertEquals(pd.get(1).getId(), "id2");
-		assertEquals(pd.get(1).getName(), "agurk");
-		assertEquals(pd.get(2).getId(), "id3");
-		assertEquals(pd.get(2).getName(), "egg");
+		assertEquals( "id1",pd.get(0).getId());
+		assertEquals( "eple",pd.get(0).getName());
+		assertEquals("id2",pd.get(1).getId());
+		assertEquals("agurk",pd.get(1).getName());
+		assertEquals("id3",pd.get(2).getId());
+		assertEquals( "egg",pd.get(2).getName());
+		
+	}
+	
+	@Test
+	public void UpdateDatabaseWithNewProductDirectories() {
+		when(firestoreutil.getAllProducts()).thenReturn(documentList);
+		when(doc1.getId()).thenReturn("id1");
+		when(doc2.getId()).thenReturn("id2");
+		when(doc3.getId()).thenReturn("id3");
+		when(doc1.get("name")).thenReturn("eple");
+		when(doc2.get("name")).thenReturn("agurk");
+		when(doc3.get("name")).thenReturn("egg");
+		
+		
+		
+		
 		
 	}
 	

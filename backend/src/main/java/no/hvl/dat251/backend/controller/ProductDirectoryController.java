@@ -58,10 +58,11 @@ public class ProductDirectoryController {
 	public ResponseEntity<HttpStatus> replaceAll(){
 	
 		List<ProductDirectory> items = dataToList(firestoreutil.getAllProducts());
-		String stmt = sqlStmtFromData(items);
 		try {
 			deleteAllProducts();
-			directoryRepository.addAll(stmt);
+			for(ProductDirectory dir : items) {
+				directoryRepository.save(dir);
+			}
 			return new ResponseEntity<>(HttpStatus.ACCEPTED);
 		}catch(Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
