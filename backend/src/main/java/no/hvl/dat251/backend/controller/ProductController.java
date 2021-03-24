@@ -17,6 +17,7 @@ import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 
 import no.hvl.dat251.backend.firestore.FirebaseInitializer;
+import no.hvl.dat251.backend.firestore.FirestoreConfig;
 import no.hvl.dat251.backend.model.Product;
 import no.hvl.dat251.backend.model.ProductDirectory;
 import no.hvl.dat251.backend.repository.ProductDirectoryRepository;
@@ -24,25 +25,26 @@ import no.hvl.dat251.backend.repository.ProductDirectoryRepository;
 @RestController
 public class ProductController {
 	
-	@Autowired
-	FirebaseInitializer firebase;
 	
 	@Autowired
+	FirestoreConfig config;
+	
 	Firestore firestore;
 	
 	@Autowired
 	ProductDirectoryRepository pdRepo;
 		
-	public ProductController(FirebaseInitializer firebase, Firestore firestore, ProductDirectoryRepository pdRepo) {
-		this.firebase = firebase;
+	public ProductController(Firestore firestore, ProductDirectoryRepository pdRepo, FirestoreConfig config) {
 		this.firestore = firestore;
 		this.pdRepo = pdRepo;
+		this.config = config;
 	}
 
 	@GetMapping("/api/products/{name}")
     public List<Product> getProducts(@PathVariable("name") String name) {
 		List<Product> productList = new ArrayList<>();
 		try {
+			firestore = config.getDb();
 	        ApiFuture<List<DocumentSnapshot>> productSnapshots = firestore.getAll(makeDocumentReferences(name));
 	        List<DocumentSnapshot> snapshotList = productSnapshots.get();
 			for (DocumentSnapshot ds : snapshotList) {
