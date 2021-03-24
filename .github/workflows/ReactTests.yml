@@ -12,7 +12,7 @@ jobs:
   
   # install dependencies and run test command
   test:
-    name: Test
+    name: test
     runs-on: ubuntu-latest
     steps:
 

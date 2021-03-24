@@ -7,24 +7,24 @@ import java.util.Map;
 
 public class ShoppingList {
 	private String id;
-	private LocalDateTime dato;
-	private List<Map<Product, Integer>> produkter;
+	private LocalDateTime date;
+	private List<Map<Product, Integer>> products;
 	
 	public ShoppingList() {
 		
 	}
 	
-	public ShoppingList(String id, LocalDateTime dato, List<Map<Product, Integer>> produkter) {
+	public ShoppingList(String id, LocalDateTime date, List<Map<Product, Integer>> products) {
 		this.id = id;
-		this.dato = dato;
-		this.produkter = new ArrayList<Map<Product, Integer>>();
+		this.date = date;
+		this.products = new ArrayList<Map<Product, Integer>>();
 	}
 	
-	public void leggTil(Product produkt) {
+	public void add(Product product) {
 		
 	}
 	
-	public Product slett(Product produkt) {
+	public Product delete(Product product) {
 		return null;
 	}
 	
@@ -32,11 +32,11 @@ public class ShoppingList {
 		return 0;
 	}
 
-	public void genererHandleliste() {
+	public void generateShoppingList() {
 		
 	}
 	
-	public void genererPdf() {
+	public void generatePdf() {
 		
 	}
 
@@ -48,19 +48,19 @@ public class ShoppingList {
 		this.id = id;
 	}
 
-	public LocalDateTime getDato() {
-		return dato;
+	public LocalDateTime getDate() {
+		return date;
 	}
 
-	public void setDato(LocalDateTime dato) {
-		this.dato = dato;
+	public void setDate(LocalDateTime date) {
+		this.date = date;
 	}
 
-	public List<Map<Product, Integer>> getProdukter() {
-		return produkter;
+	public List<Map<Product, Integer>> getProducts() {
+		return products;
 	}
 
-	public void setProdukter(List<Map<Product, Integer>> produkter) {
-		this.produkter = produkter;
+	public void setProducts(List<Map<Product, Integer>> products) {
+		this.products = products;
 	}
 }

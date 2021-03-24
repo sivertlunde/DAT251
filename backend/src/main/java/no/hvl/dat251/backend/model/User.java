@@ -5,21 +5,19 @@ import java.util.List;
 public class User {
 	private String id;
 	private String email;
-	private String passord;
-	private String addresse;
-	private ShoppingList tidligereLister;
-	private List<Product> favoritter;
-	private List<Product> svarteliste;
+	private String password;
+	private String address;
+	private ShoppingList previousLists;
+	private List<Product> favorites;
+	private List<Product> blackList;
 	
 	public User() {
 		
 	}
 	
-	public User(String id, String email, String passord, String addresse) {
+	public User(String id, String email) {
 		this.id = id;
 		this.email = email;
-		this.passord = passord;
-		this.addresse = addresse;
 	}
 
 	public String getId() {
@@ -38,43 +36,43 @@ public class User {
 		this.email = email;
 	}
 
-	public String getPassord() {
-		return passord;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPassord(String passord) {
-		this.passord = passord;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getAddresse() {
-		return addresse;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setAddresse(String addresse) {
-		this.addresse = addresse;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
-	public ShoppingList getTidligereLister() {
-		return tidligereLister;
+	public ShoppingList getPreviousLists() {
+		return previousLists;
 	}
 
-	public void setTidligereLister(ShoppingList tidligereLister) {
-		this.tidligereLister = tidligereLister;
+	public void setPreviousLists(ShoppingList previousLists) {
+		this.previousLists = previousLists;
 	}
 
-	public List<Product> getFavoritter() {
-		return favoritter;
+	public List<Product> getFavorites() {
+		return favorites;
 	}
 
-	public void setFavoritter(List<Product> favoritter) {
-		this.favoritter = favoritter;
+	public void setFavorites(List<Product> favorites) {
+		this.favorites = favorites;
 	}
 
-	public List<Product> getSvarteliste() {
-		return svarteliste;
+	public List<Product> getBlackList() {
+		return blackList;
 	}
 
-	public void setSvarteliste(List<Product> svarteliste) {
-		this.svarteliste = svarteliste;
-	}	
+	public void setBlackList(List<Product> blackList) {
+		this.blackList = blackList;
+	}
 }
