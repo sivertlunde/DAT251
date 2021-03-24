@@ -36,6 +36,7 @@ import no.hvl.dat251.backend.repository.ProductDirectoryRepository;
 
 public class GetProductsTests {
 
+	 @Mock private FirebaseInitializer mockedFirebase;
 	 @Mock private ProductDirectoryRepository mockedPDRepo;
 	 @Mock private Firestore mockedFirestore;
 	 @Mock private CollectionReference mockedCR;
@@ -51,7 +52,7 @@ public class GetProductsTests {
 	 
 	 @BeforeEach
 	 public void setup() {
-		 pc = new ProductController(mockedFirestore, mockedPDRepo);
+		 pc = new ProductController(mockedFirebase, mockedFirestore, mockedPDRepo);
 		 pdList = new ArrayList<>();
 		 pd1 = new ProductDirectory("", "");
 		 pd2 = new ProductDirectory("", "");
