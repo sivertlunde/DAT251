@@ -30,13 +30,14 @@ public class ProductDirectoryController {
 	@Autowired
 	FirestoreConfig config;
 	
-	public ProductDirectoryController(FirestoreUtil firestoreutil, FirestoreConfig config) {
-		this.firestoreutil = firestoreutil;
-		this.config = config;
-	}
-
 	@Autowired
 	ProductDirectoryRepository directoryRepository;
+	
+	public ProductDirectoryController(FirestoreUtil firestoreutil, FirestoreConfig config, ProductDirectoryRepository repo) {
+		this.firestoreutil = firestoreutil;
+		this.config = config;
+		this.directoryRepository = repo;
+	}
 	
 	public String url ="jdbc:derby:derbydb";
 	
@@ -90,23 +91,23 @@ public class ProductDirectoryController {
 	}
 
 
-	public String sqlStmtFromData(List<ProductDirectory> firebaseproducts) {
-		// TODO Auto-generated method stub
-		String result ="";
-		if(!firebaseproducts.isEmpty()) {
-			for(int i =0; i<firebaseproducts.size(); i++ ) {
-				if(i==firebaseproducts.size()-1) {
-					result = result + "( '" + firebaseproducts.get(i).getId() + "', '" + firebaseproducts.get(i).getName() +"')";
-				}else {
-					result = result + "( '" + firebaseproducts.get(i).getId() + "', '" + firebaseproducts.get(i).getName() +"'),";	
-				}
-			}
-			
-		}
-		
-		return result;
-		
-	}
+//	public String sqlStmtFromData(List<ProductDirectory> firebaseproducts) {
+//		// TODO Auto-generated method stub
+//		String result ="";
+//		if(!firebaseproducts.isEmpty()) {
+//			for(int i =0; i<firebaseproducts.size(); i++ ) {
+//				if(i==firebaseproducts.size()-1) {
+//					result = result + "( '" + firebaseproducts.get(i).getId() + "', '" + firebaseproducts.get(i).getName() +"')";
+//				}else {
+//					result = result + "( '" + firebaseproducts.get(i).getId() + "', '" + firebaseproducts.get(i).getName() +"'),";	
+//				}
+//			}
+//			
+//		}
+//		
+//		return result;
+//		
+//	}
 
 
 	public List<ProductDirectory> dataToList(List<QueryDocumentSnapshot> documents) {
