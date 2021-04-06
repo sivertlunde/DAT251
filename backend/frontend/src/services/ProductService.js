@@ -1,7 +1,6 @@
 function jsonProductsToDropdownList(products) {
     let productOptions = [];
     products.forEach(product => {
-        console.log(product)
         let productOption = {};
         productOption.label = product['name'];//+"\tkr "+product['storePrice']['kolonialno'];
         productOption.value = product['name'];
