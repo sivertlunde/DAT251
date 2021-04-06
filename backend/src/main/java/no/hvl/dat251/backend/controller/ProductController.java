@@ -2,8 +2,10 @@ package no.hvl.dat251.backend.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +51,7 @@ public class ProductController {
 	        List<DocumentSnapshot> snapshotList = productSnapshots.get();
 			for (DocumentSnapshot ds : snapshotList) {
 	        	Map<String, Object> documentMap = ds.getData();
-	        	Map<String, Double> prices = (Map<String, Double>) documentMap.get("prices");
+	        	Map<String, Double> prices = getPriceMap(documentMap.get("prices"));
 	        	Product p = new Product(ds.getId(), documentMap.get("name").toString(), prices, 0.0, "");
 	        	productList.add(p);
 	        }
@@ -65,7 +67,7 @@ public class ProductController {
 
 	public DocumentReference[] makeDocumentReferences(String string) {
 		List<DocumentReference> drList = new ArrayList<>();
-		List<ProductDirectory> pdList = pdRepo.findByNameContaining(string);
+		List<ProductDirectory> pdList = pdRepo.findByNameContainingIgnoreCase(string);
 		for (ProductDirectory pd : pdList) {
 			DocumentReference dr = firestore.collection("products").document(pd.getId());
 			drList.add(dr);
@@ -75,5 +77,26 @@ public class ProductController {
 			drTable[i] = drList.get(i);
 		}
 		return drTable;
+	}
+	
+	private Map<String, Double> getPriceMap(Object map) {
+		Map<String, Object> objectMap = (Map<String, Object>) map;
+		Map<String, Double> priceMap = new HashMap<String, Double>();
+		Set<String> keys = objectMap.keySet();
+		for (String key : keys) {
+			Object priceObject = objectMap.get(key);
+			double price = 0.0;
+			if(priceObject instanceof Long) {
+				price = (double)(long)priceObject;
+			} else if (priceObject instanceof Double) {
+				price = (double)priceObject;
+			}
+			if (price == 0.0) {
+				priceMap.put(key, null);
+			} else {
+				priceMap.put(key, price);
+			}
+		}
+		return priceMap;
 	}
 }
