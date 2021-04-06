@@ -31,25 +31,25 @@ import org.springframework.format.datetime.DateFormatter;
 @MockitoSettings(strictness = Strictness.LENIENT)
 
 public class DomainModelTests {
-	private Butikk butikk;
-	private Bruker bruker;
-	private Handleliste handleliste;
-	private Produkt produkt;
+	private Store butikk;
+	private User bruker;
+	private ShoppingList handleliste;
+	private Product produkt;
 	
 	@BeforeEach
 	public void setup() {
-		ArrayList<Map<Produkt, Integer>> produkter = new ArrayList<>();
-		Map<Produkt, Integer> produktVare = new HashMap<>();
+		ArrayList<Map<Product, Integer>> produkter = new ArrayList<>();
+		Map<Product, Integer> produktVare = new HashMap<>();
 		Map<String, Double> produktButikkOgPris = new HashMap<>();
 		produktButikkOgPris.put("Spar", 15.99);
 		produktVare.put(produkt, 1);
 		produkter.add(produktVare);
 		LocalDateTime date = LocalDateTime.now();
 		
-		butikk = new Butikk("Spar", "https://spar.no/");
-		bruker = new Bruker("123", "test@gmail.com", "passord123", "testvegen 123");
-		produkt = new Produkt("1", "Agurk", produktButikkOgPris, 1.75, "Gronnsaker");
-		handleliste = new Handleliste("1", date, produkter);
+		butikk = new Store("Spar", "https://spar.no/");
+//		bruker = new User("123", "test@gmail.com", "passord123", "testvegen 123");
+		produkt = new Product("1", "Agurk", produktButikkOgPris, 1.75, "Gronnsaker");
+		handleliste = new ShoppingList("1", date, produkter);
 	}
 	
 	@Test

@@ -6,8 +6,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import no.hvl.dat251.backend.model.ProduktDirectory;
-import no.hvl.dat251.backend.repository.ProduktDirectoryRepository;
+import no.hvl.dat251.backend.model.ProductDirectory;
+import no.hvl.dat251.backend.repository.ProductDirectoryRepository;
 
 
 @SpringBootApplication
@@ -19,11 +19,11 @@ public class BackendApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(ProduktDirectoryRepository pr) {
+	public CommandLineRunner demo(ProductDirectoryRepository pr) {
 		return (args) -> {
 			// save a few entities
 			
-			ProduktDirectory item = new ProduktDirectory("banan", "idher");
+			ProductDirectory item = new ProductDirectory("Sorrel - Fresh", "04lqa16zHxKbUXXTeyG9");
 			
 			pr.save(item);
 			
