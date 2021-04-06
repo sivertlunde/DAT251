@@ -20,6 +20,6 @@ public interface ProductDirectoryRepository extends CrudRepository<ProductDirect
 	
 	//void addAll(@Param("statement") String statement);
 	
-	List<ProductDirectory> findByNameContaining(String name);
+	List<ProductDirectory> findByNameContainingIgnoreCase(String name);
 
 }
