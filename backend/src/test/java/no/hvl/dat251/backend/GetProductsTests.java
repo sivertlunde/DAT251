@@ -86,7 +86,7 @@ public class GetProductsTests {
 		 when(dr2.getId()).thenReturn("2");
 		 when(dr3.getId()).thenReturn("3");
 		 when(mockedConfig.getDb()).thenReturn(mockedFirestore);
-		 when(mockedPDRepo.findByNameContaining(any(String.class))).thenReturn(pdList);
+		 when(mockedPDRepo.findByNameContainingIgnoreCase(any(String.class))).thenReturn(pdList);
 		 when(mockedFirestore.collection(any(String.class))).thenReturn(mockedCR);
 		 when(mockedCR.document(any(String.class))).thenReturn(dr1, dr2, dr3);
 		 DocumentReference[] actualDRTable = pc.makeDocumentReferences("");
