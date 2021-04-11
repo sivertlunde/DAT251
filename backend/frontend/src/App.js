@@ -1,52 +1,29 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Routes from "./Routes";
 
 class App extends Component {
 
-  state = {};
-
-  componentDidMount() {
-    setInterval(this.hello, 250);
-  }
-
-  hello = () => {
-    fetch('/api/hello')
-      .then(response => response.text())
-      .then(message => {
-        this.setState({ message: message });
-      });
-  };
-
-  activateLasers = () => {
-    fetch('/api/productDirectories')
-    .then(response => response.text())
-    .then(message => {
-      console.log(message);
-    })
-  }
+  
 
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">{this.state.message}</h1>
-          <p>
-            Edit <code>src/App.js</code> and save to reload. You should be able to see the changes straight away.
-        </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-        </a>
-        <button onClick={this.activateLasers}>
-          Activate Lasers
-        </button>
-        </header>
+        <nav>
+          <input type="checkbox" id="check"></input>
+          <label for="check" class="checkbtn">
+            <i class="fas fa-bars"></i>
+          </label>
+          <div class ="logo"><a href="/"><img src="logo.png" alt="Min Handleliste"></img></a></div>
+          <ul classname="header">
+            <li><a href="/">Hjem</a></li>
+            <li><a href="/browse">Browse</a></li>
+            <li><a href="/handleliste">Handleliste</a></li>
+            <li><a href="/sammenlign">Sammenlign priser</a></li>
+            <li><a href="/logginn">Logg inn</a></li>
+          </ul>
+        </nav>
+        <Routes />
       </div>
     );
   }

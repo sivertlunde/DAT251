@@ -5,19 +5,20 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+
 @Entity(name = "productDirectory")
-public class ProduktDirectory {
+public class ProductDirectory {
 	@Id
 	private String id;
 	private String name;
 	
-	public ProduktDirectory() {
+	public ProductDirectory() {
 		
 	}
 	
-	public ProduktDirectory(String name, String id) {
-		this.name = name;
+	public ProductDirectory(String id, String name) {
 		this.id=id;
+		this.name = name;
 	}
 
 
