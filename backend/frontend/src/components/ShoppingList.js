@@ -46,6 +46,10 @@ class ShoppingList extends React.Component {
         })
     }
 
+    onInputchange() {
+        
+    }
+
 
 
     render() {
@@ -55,7 +59,11 @@ class ShoppingList extends React.Component {
                     <div className="col-xs-6 ">
                         <h1>Lag handleliste </h1>
 
-                        <AsyncSelect defaultOptions={colourOptions} loadOptions={PromiseOptions} />
+                        <AsyncSelect
+                        
+                            loadOptions={PromiseOptions}
+                            //onInputChange={this.onInputchange}
+                        />
                         <table className="table table-striped table-hover">
                             <thead>
                                 <tr>
