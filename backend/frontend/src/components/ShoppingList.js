@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from "react-router";
 import AsyncSelect from "react-select/async"
 import ProductService from '../services/ProductService';
+import DropdownInput from './DropdownInput';
 
 const shopNames = ["coop", "kolonialno", "meny", "spar"]
 
@@ -16,7 +17,7 @@ function sum(shopName, shoppingList) {
     return Math.round(sum * 100) / 100;
 }
 
-const PromiseOptions = input => ProductService.getProducts(input);
+//const PromiseOptions = input => ProductService.getProducts(input);
 
 
 class ShoppingList extends React.Component {
@@ -59,11 +60,8 @@ class ShoppingList extends React.Component {
                     <div className="col-xs-6 ">
                         <h1>Lag handleliste </h1>
 
-                        <AsyncSelect
+                        <DropdownInput/>
                         
-                            loadOptions={PromiseOptions}
-                            //onInputChange={this.onInputchange}
-                        />
                         <table className="table table-striped table-hover">
                             <thead>
                                 <tr>
