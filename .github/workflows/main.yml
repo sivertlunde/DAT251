@@ -28,4 +28,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "minhandleliste" #Must be unique in Heroku
           heroku_email: "sivert.lunde@gmail.com"
+          buildpack: https://github.com/mars/create-react-app-buildpack.git
           appdir: "backend" # <- This will point to the api folder in your project
