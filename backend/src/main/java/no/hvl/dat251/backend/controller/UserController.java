@@ -31,9 +31,9 @@
 //	UserRepository userRepository;
 //	
 //	@Autowired
-//	FirestoreConfig firebase;
+//	FirestoreConfig config;
 //	
-//	@GetMapping("/users")
+//	@GetMapping("/api/users")
 //	public ResponseEntity<List<User>> getAllUsers(){
 //		try {
 //			List<User> users = new ArrayList<User>();
@@ -47,7 +47,7 @@
 //		}
 //	}
 //	
-//	@GetMapping("/users/{id}")
+//	@GetMapping("/api/users/{id}")
 //	public ResponseEntity<User> getUserById(@PathVariable("id") String id) {
 //		Optional<User> user = userRepository.findById(id);
 //		System.out.println(id);
@@ -58,7 +58,7 @@
 //		}
 //	}
 //	
-//	@GetMapping("/users/user/{email}")
+//	@GetMapping("/api/users/user/{email}")
 //	public ResponseEntity<User> getUserByUsername(@PathVariable("email") String email, @RequestHeader (name="Authorization") String token){
 //		String _token = token.replaceAll("Bearer ", "");
 //		if(getValidToken(_token) != null) {
@@ -73,7 +73,7 @@
 //		}
 //	}
 //	
-//	@PutMapping("/users/{id}")
+//	@PutMapping("/api/users/{id}")
 //	//@RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 //	public ResponseEntity<User> updateUser(@RequestHeader (name="Authorization") String token, @PathVariable("id") String id, @RequestParam(required = false) Long roleId) {
 //		String _token = token.replaceAll("Bearer ", "");
@@ -94,7 +94,7 @@
 //		}
 //	}
 //	
-//	@PostMapping("/users")
+//	@PostMapping("/api/users")
 //	public ResponseEntity<User> createUser(@RequestHeader (name="Authorization") String token, @RequestParam(required = false) Long roleId) {
 //		String _token = token.replaceAll("Bearer ", "");
 //		FirebaseToken firebasetoken = getValidToken(_token);
@@ -113,13 +113,13 @@
 //		}
 //	}
 //	
-//	@DeleteMapping("/users/{id}")
+//	@DeleteMapping("/api/users/{id}")
 //	public ResponseEntity<HttpStatus> deleteUser(@RequestHeader (name="Authorization") String token,@PathVariable("id") String id) {
 //		String _token = token.replaceAll("Bearer ", "");
 //		FirebaseToken firebasetoken = getValidToken(_token);
 //		if(firebasetoken != null) {
 //			try {
-//				firebase.getAuth().deleteUser(id);
+//				config.getAuth().deleteUser(id);
 //				userRepository.deleteById(id);
 //				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 //			} catch (Exception e) {
@@ -133,7 +133,7 @@
 //	
 //	private FirebaseToken getValidToken(String token) {
 //		try {
-//			return firebase.getAuth().verifyIdToken(token);
+//			return config.getAuth().verifyIdToken(token);
 //		}catch(FirebaseAuthException e) {
 //			e.printStackTrace();
 //		}catch(IOException e) {
