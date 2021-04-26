@@ -47,7 +47,7 @@ class ShoppingList extends React.Component {
     }
 
     onInputchange() {
-        
+
     }
 
 
@@ -60,7 +60,7 @@ class ShoppingList extends React.Component {
                         <h1>Lag handleliste </h1>
 
                         <AsyncSelect
-                        
+
                             loadOptions={PromiseOptions}
                             //onInputChange={this.onInputchange}
                         />
