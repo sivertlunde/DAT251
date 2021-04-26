@@ -2,30 +2,49 @@ import React, { Component } from 'react';
 import './App.css';
 import Routes from "./Routes";
 import firebase from 'firebase';
+import { useState, useEffect } from 'react';
 
 var config = {
-  apiKey: process.env.REACT_APP_API_KEY,
-  authDomain: process.env.REACT_APP_AUTHDOMAIN,
-  databaseURL: process.env.REACT_APP_BASEURL,
-  projectId: process.env.REACT_APP_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_STORAGEBUCKET,
-  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_APP_ID 
+  apiKey: "AIzaSyACKQCdycUQOvW0iuRe0nmi0wg0fXakCLk",
+  authDomain: "dat251.firebaseapp.com",
+  projectId: "dat251",
+  storageBucket: "dat251.appspot.com",
+  messagingSenderId: "375043058577",
+  appId: "1:375043058577:web:0b59749814ec68c2bdc830"
+
 }
 
 firebase.initializeApp(config);
 
-class App extends Component {
+function App() {
 
-  
+  const [user, setUser] = useState();
+  const [initializing, setInitializing] = useState(true);
 
-  render() {
-    return (
-      <div className="App">
-        <Routes />
-      </div>
+  useEffect(() => {
+    const subscriber = firebase.auth().onAuthStateChanged(
+      (_user) =>{
+        setUser(_user);
+        setInitializing(false);
+      }
     );
-  }
+    return subscriber;
+  }, []);
+  
+  return (
+      <div className="App">
+        <a className="App-link" href = "/">handleliste</a>
+        {!initializing ? 
+          user ?
+          <a className="App-link" href="/" onClick={()=> {firebase.auth().signOut();}}> Log Out</a>
+          :
+          <a className="App-link" href="/login"> Log in</a>
+          :
+          <div></div>
+        }
+        <Routes></Routes>
+      </div>
+  );
 }
 
 export default App;
