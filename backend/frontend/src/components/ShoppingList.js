@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from "react-router";
 import AsyncSelect from "react-select/async"
+import ProductService from '../services/ProductService';
 
 const shopNames = ["coop", "kolonialno", "meny", "spar"]
 
@@ -14,6 +15,9 @@ function sum(shopName, shoppingList) {
 
     return Math.round(sum * 100) / 100;
 }
+
+const PromiseOptions = input => ProductService.getProducts(input);
+
 
 class ShoppingList extends React.Component {
 
@@ -42,6 +46,10 @@ class ShoppingList extends React.Component {
         })
     }
 
+    onInputchange() {
+        
+    }
+
 
 
     render() {
@@ -51,7 +59,11 @@ class ShoppingList extends React.Component {
                     <div className="col-xs-6 ">
                         <h1>Lag handleliste </h1>
 
-                        <AsyncSelect />
+                        <AsyncSelect
+                        
+                            loadOptions={PromiseOptions}
+                            //onInputChange={this.onInputchange}
+                        />
                         <table className="table table-striped table-hover">
                             <thead>
                                 <tr>
@@ -77,7 +89,7 @@ class ShoppingList extends React.Component {
                                                         })
                                                     }
                                                     <td><button className="btn btn-danger btn-sm" onClick={() => {
-                                                        this.setState({shoppingList: this.state.shoppingList.filter( event => event.name !== product.name)}) 
+                                                        this.setState({ shoppingList: this.state.shoppingList.filter(event => event.name !== product.name) })
                                                     }
 
                                                     }>-</button></td>

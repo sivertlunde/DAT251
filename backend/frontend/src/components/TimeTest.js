@@ -19,6 +19,14 @@ class TimeTest extends React.Component {
             });
     };
 
+    activateLasers = () => {
+        fetch('/api/productDirectories')
+            .then(response => response.text())
+            .then(message => {
+                console.log(message);
+            })
+    }
+
     render() {
         return (
             <header className="App-header">
