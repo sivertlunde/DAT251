@@ -25,8 +25,37 @@ class ShoppingList extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            shoppingList: this.props.products
+            shoppingList: this.props.products,
+            showMenu: false,
+            savedlists: []
         };
+
+        this.showMenu = this.showMenu.bind(this);
+        this.closeMenu = this.closeMenu.bind(this);
+    }
+
+    showMenu(event){
+        event.preventDefault();
+        console.log("Its  here!");
+        let list = []
+        firebase.firestore().collection("users").doc(this.state.user.uid).collection("shoppingLists").get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                // doc.data() is never undefined for query doc snapshots
+                list.push(doc.data());
+                //console.log(doc.id, " => ", doc.data());
+            });
+            this.setState({savedlists: list});
+        });
+
+
+        this.setState({ showMenu: true});
+    }
+
+    closeMenu() {
+        console.log("Its not here :(");
+        this.setState({ showMenu: false}, () =>{
+            document.removeEventListener('mousedown', this.closeMenu);
+        });
     }
 
 
@@ -155,14 +184,42 @@ class ShoppingList extends React.Component {
                                     
                                 }
                             }
-                            >Lagre Handleliste</button>
+                            >Lagre Handleliste</button>                        
 
                             :
                             <div></div>
 
                             }
-                            
-                            
+                        <div>
+
+                        <button onClick = {this.showMenu}>
+                            Velg en lagret handleliste
+                            </button>
+
+                        {
+                            this.state.showMenu
+                                ? (
+                                    <div className = "menu">
+                                        {
+                                        this.state.savedlists.map(list =>{
+                                            console.log(list);
+                                            const date = list.date.toDate();
+                                            return (<button onClick={()=>{
+                                                console.log("henlo")
+                                                this.setState({shoppingList: list.shoppinglist, showMenu:false});
+                                            }}>{date.toLocaleString()}</button>) 
+                                        })
+                                        
+                                        
+                                        }
+                                    </div>
+                                )
+                                : (
+                                    null
+                                )
+                        }
+
+                        </div>
                         </div>
                     </div>
                 </div >
