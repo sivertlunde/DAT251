@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from "react-router";
 import DropdownInput from './DropdownInput';
+import firebase from '../initFirebase';
 
 const shopNames = ["coop", "kolonialno", "meny", "spar"]
 
@@ -16,6 +17,7 @@ function sum(shopName, shoppingList) {
 }
 
 //const PromiseOptions = input => ProductService.getProducts(input);
+
 
 
 class ShoppingList extends React.Component {
@@ -43,6 +45,19 @@ class ShoppingList extends React.Component {
         this.setState({
             shoppingList: mockList
         })
+
+        this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(
+            (_user) => {
+                this.setState({user:_user});
+                console.log("user: ", _user);
+            }
+        )
+
+
+    }
+
+    componentWillUnmount(){
+        this.unregisterAuthObserver();
     }
 
     addProduct = (product) => {
@@ -130,10 +145,35 @@ class ShoppingList extends React.Component {
                                 </tr>
                             </tfoot>
                         </table>
+                        {this.state.user ?
+                            <button className="btn btn-primary" 
+                            onClick={() => {
+                                    //const curruser = userref.doc(this.state.user);
+                                    firebase.firestore().collection("users").doc(this.state.user.uid).set({}, {merge:true})
+                                    .then(()=> {
+                                        const shoppinglistref = firebase.firestore().collection("users").doc(this.state.user.uid).collection("shoppingLists");
+                                        console.log(shoppinglistref);
+                                        shoppinglistref.add({
+                                        'shoppinglist': this.state.shoppingList,
+                                        'userid': this.state.user.uid,
+                                        'date': new Date()
+                                        });
+                                    })
+                                    
+                                }
+                            }
+                            >Lagre Handleliste</button>
+
+                            :
+                            <div></div>
+
+                            }
+                            
+                            
+                        </div>
                     </div>
-                </div>
-            </div >
-        )
+                </div >
+            ) 
     }
 }
 
