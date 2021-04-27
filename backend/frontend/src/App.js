@@ -4,7 +4,7 @@ import Routes from "./Routes";
 
 class App extends Component {
 
-  
+
 
   render() {
     return (
@@ -19,6 +19,7 @@ class App extends Component {
             <li><a href="/">Hjem</a></li>
             <li><a href="/browse">Browse</a></li>
             <li><a href="/handleliste">Handleliste</a></li>
+            <li><a href="/rawtext">Rawtext</a></li>
             <li><a href="/sammenlign">Sammenlign priser</a></li>
             <li><a href="/logginn">Logg inn</a></li>
           </ul>
