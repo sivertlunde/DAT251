@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import ProductService from '../services/ProductService';
 import AsyncSelect from 'react-select/async';
  
-function DropdownInput() {
-  const [inputValue, setValue] = useState('');
-  const [selectedValue, setSelectedValue] = useState(null);
+function DropdownInput(props) {
+  const [,setValue] = useState('');
+  const [selectedValue,] = useState(null);
  
   // handle input change event
   const handleInputChange = value => {
@@ -13,7 +13,8 @@ function DropdownInput() {
  
   // handle selection
   const handleChange = value => {
-    setSelectedValue(value);
+    props.onAddProduct(value.product);
+    setValue(null);
   }
  
   // load options using API call
@@ -24,8 +25,8 @@ function DropdownInput() {
     <div className="DropdownInput">
       <AsyncSelect
         value={selectedValue}
-        getOptionLabel={e => e.title}
-        getOptionValue={e => e.id}
+        // getOptionLabel={e => e.title}
+        // getOptionValue={e => e.id}
         loadOptions={loadOptions}
         onInputChange={handleInputChange}
         onChange={handleChange}

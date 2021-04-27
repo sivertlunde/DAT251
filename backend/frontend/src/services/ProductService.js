@@ -4,6 +4,7 @@ function jsonProductsToDropdownList(products) {
         let productOption = {};
         productOption.label = product['name'];//+"\tkr "+product['storePrice']['kolonialno'];
         productOption.value = product['name'];
+        product.qty = 1;
         productOption.product = product;
         productOptions.push(productOption);
     });
