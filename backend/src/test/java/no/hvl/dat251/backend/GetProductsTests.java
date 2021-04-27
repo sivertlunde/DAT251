@@ -34,6 +34,7 @@ import com.google.cloud.firestore.Firestore;
 import no.hvl.dat251.backend.controller.ProductController;
 import no.hvl.dat251.backend.firestore.FirebaseInitializer;
 import no.hvl.dat251.backend.firestore.FirestoreConfig;
+import no.hvl.dat251.backend.firestore.FirestoreUtil;
 import no.hvl.dat251.backend.model.Product;
 import no.hvl.dat251.backend.model.ProductDirectory;
 import no.hvl.dat251.backend.repository.ProductDirectoryRepository;
@@ -44,7 +45,7 @@ import no.hvl.dat251.backend.repository.ProductDirectoryRepository;
 public class GetProductsTests {
 
 	 @Mock private ProductDirectoryRepository mockedPDRepo;
-	 @Mock private Firestore mockedFirestore;
+	 @Mock private FirestoreUtil mockedFirestoreUtil;
 	 @Mock private FirestoreConfig mockedConfig;
 	 @Mock private CollectionReference mockedCR;
 	 @Mock private DocumentReference dr1;
@@ -70,65 +71,68 @@ public class GetProductsTests {
 	 
 	 @BeforeEach
 	 public void setup() {
-		 pc = new ProductController(mockedFirestore, mockedPDRepo, mockedConfig);
+		 pc = new ProductController(mockedFirestoreUtil, mockedPDRepo, mockedConfig);
 	 }
 	 
-	 @Test
-	 public void controllerMakesDocumentReferencesFromDB() throws IOException {
-		 pdList = new ArrayList<>();
-		 pd1 = new ProductDirectory("", "");
-		 pd2 = new ProductDirectory("", "");
-		 pd3 = new ProductDirectory("", "");
-		 pdList.add(pd1);
-		 pdList.add(pd2);
-		 pdList.add(pd3);
-		 when(dr1.getId()).thenReturn("1");
-		 when(dr2.getId()).thenReturn("2");
-		 when(dr3.getId()).thenReturn("3");
-		 when(mockedConfig.getDb()).thenReturn(mockedFirestore);
-		 when(mockedPDRepo.findByNameContainingIgnoreCase(any(String.class))).thenReturn(pdList);
-		 when(mockedFirestore.collection(any(String.class))).thenReturn(mockedCR);
-		 when(mockedCR.document(any(String.class))).thenReturn(dr1, dr2, dr3);
-		 DocumentReference[] actualDRTable = pc.makeDocumentReferences("");
-		 assertEquals("1", actualDRTable[0].getId());
-		 assertEquals("2", actualDRTable[1].getId());
-		 assertEquals("3", actualDRTable[2].getId());
-	 }
-	 
-	 @Test
-	 public void controllerMakesListOfProductsBasedOnDocumentSnapshotsReturnedFromFirestore() throws InterruptedException, ExecutionException {
-		 snapshots = new ArrayList<>();
-		 snapshots.add(ds1);
-		 snapshots.add(ds2);
-		 snapshots.add(ds3);
-		 documentMap1 = new HashMap<>();
-		 documentMap2 = new HashMap<>();
-		 documentMap3 = new HashMap<>();
-		 prices1 = new HashMap<>();
-		 prices2 = new HashMap<>();
-		 prices3 = new HashMap<>();
-		 prices1.put("meny", 40.3);
-		 prices1.put("spar", 47.3);
-		 prices2.put("meny", 30.3);
-		 prices2.put("spar", 37.3);
-		 prices3.put("meny", 20.3);
-		 prices3.put("spar", 27.3);
-		 documentMap1.put("prices", prices1);
-		 documentMap1.put("name", new String("product1"));
-		 documentMap2.put("prices", prices2);
-		 documentMap2.put("name", new String("product2"));
-		 documentMap3.put("prices", prices3);
-		 documentMap3.put("name", new String("product3"));
-		 when(mockedConfig.getDb()).thenReturn(mockedFirestore);
-		 when(mockedFirestore.getAll(any(DocumentReference[].class))).thenReturn(mockedFuture);
-		 when(mockedFuture.get()).thenReturn(snapshots);
-		 when(ds1.getData()).thenReturn(documentMap1);
-		 when(ds1.getId()).thenReturn("1");
-		 when(ds2.getData()).thenReturn(documentMap2);
-		 when(ds2.getId()).thenReturn("2");
-		 when(ds3.getData()).thenReturn(documentMap3);
-		 when(ds3.getId()).thenReturn("3");
-		 List<Product> products = pc.getProducts("name");
-		 assertEquals("product3", products.get(2).getName());
-	 }
+	 /*
+	  * These tests have been commented out as the methods used have been extracted to another class
+	  */
+//	 @Test
+//	 public void controllerMakesDocumentReferencesFromDB() throws IOException {
+//		 pdList = new ArrayList<>();
+//		 pd1 = new ProductDirectory("", "");
+//		 pd2 = new ProductDirectory("", "");
+//		 pd3 = new ProductDirectory("", "");
+//		 pdList.add(pd1);
+//		 pdList.add(pd2);
+//		 pdList.add(pd3);
+//		 when(dr1.getId()).thenReturn("1");
+//		 when(dr2.getId()).thenReturn("2");
+//		 when(dr3.getId()).thenReturn("3");
+//		 when(mockedConfig.getDb()).thenReturn(mockedFirestore);
+//		 when(mockedPDRepo.findByNameContainingIgnoreCase(any(String.class))).thenReturn(pdList);
+//		 when(mockedFirestore.collection(any(String.class))).thenReturn(mockedCR);
+//		 when(mockedCR.document(any(String.class))).thenReturn(dr1, dr2, dr3);
+//		 DocumentReference[] actualDRTable = pc.makeDocumentReferences("");
+//		 assertEquals("1", actualDRTable[0].getId());
+//		 assertEquals("2", actualDRTable[1].getId());
+//		 assertEquals("3", actualDRTable[2].getId());
+//	 }
+//	 
+//	 @Test
+//	 public void controllerMakesListOfProductsBasedOnDocumentSnapshotsReturnedFromFirestore() throws InterruptedException, ExecutionException {
+//		 snapshots = new ArrayList<>();
+//		 snapshots.add(ds1);
+//		 snapshots.add(ds2);
+//		 snapshots.add(ds3);
+//		 documentMap1 = new HashMap<>();
+//		 documentMap2 = new HashMap<>();
+//		 documentMap3 = new HashMap<>();
+//		 prices1 = new HashMap<>();
+//		 prices2 = new HashMap<>();
+//		 prices3 = new HashMap<>();
+//		 prices1.put("meny", 40.3);
+//		 prices1.put("spar", 47.3);
+//		 prices2.put("meny", 30.3);
+//		 prices2.put("spar", 37.3);
+//		 prices3.put("meny", 20.3);
+//		 prices3.put("spar", 27.3);
+//		 documentMap1.put("prices", prices1);
+//		 documentMap1.put("name", new String("product1"));
+//		 documentMap2.put("prices", prices2);
+//		 documentMap2.put("name", new String("product2"));
+//		 documentMap3.put("prices", prices3);
+//		 documentMap3.put("name", new String("product3"));
+//		 when(mockedConfig.getDb()).thenReturn(mockedFirestore);
+//		 when(mockedFirestore.getAll(any(DocumentReference[].class))).thenReturn(mockedFuture);
+//		 when(mockedFuture.get()).thenReturn(snapshots);
+//		 when(ds1.getData()).thenReturn(documentMap1);
+//		 when(ds1.getId()).thenReturn("1");
+//		 when(ds2.getData()).thenReturn(documentMap2);
+//		 when(ds2.getId()).thenReturn("2");
+//		 when(ds3.getData()).thenReturn(documentMap3);
+//		 when(ds3.getId()).thenReturn("3");
+//		 List<Product> products = pc.getProducts("name");
+//		 assertEquals("product3", products.get(2).getName());
+//	 }
 }
