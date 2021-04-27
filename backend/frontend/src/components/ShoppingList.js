@@ -93,7 +93,7 @@ class ShoppingList extends React.Component {
                                     <td>Produktnavn</td>
                                     {
                                         shopNames.map(shopName => {
-                                            return <td><img width="60" alt={shopName} src={"/shopLogos/" + shopName + ".png"}></img></td>;
+                                            return <td><img width="60" alt={shopName} src={"/" + shopName + ".png"}></img></td>;
                                         })
                                     }
                                     <td></td>
