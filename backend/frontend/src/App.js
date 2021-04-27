@@ -1,20 +1,21 @@
 import React from 'react';
 import './App.css';
 import Routes from "./Routes";
-import firebase from 'firebase';
+//import firebase from 'firebase';
 import { useState, useEffect } from 'react';
+import firebase from './initFirebase';
 
-var config = {
-  apiKey: "AIzaSyACKQCdycUQOvW0iuRe0nmi0wg0fXakCLk",
-  authDomain: "dat251.firebaseapp.com",
-  projectId: "dat251",
-  storageBucket: "dat251.appspot.com",
-  messagingSenderId: "375043058577",
-  appId: "1:375043058577:web:0b59749814ec68c2bdc830"
+// var config = {
+//   apiKey: "AIzaSyACKQCdycUQOvW0iuRe0nmi0wg0fXakCLk",
+//   authDomain: "dat251.firebaseapp.com",
+//   projectId: "dat251",
+//   storageBucket: "dat251.appspot.com",
+//   messagingSenderId: "375043058577",
+//   appId: "1:375043058577:web:0b59749814ec68c2bdc830"
 
-}
+// }
 
-firebase.initializeApp(config);
+// firebase.initializeApp(config);
 
 function App() {
 
