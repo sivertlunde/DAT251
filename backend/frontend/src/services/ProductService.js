@@ -29,6 +29,22 @@ class ProductService {
                 })
         )
     }
+
+    productsFromRawtext(input) {
+        return new Promise(resolve =>
+          fetch('/api/shoppinglist/', {
+            method: 'POST',
+            body: input
+        })
+        .then(response => response.json())
+        .then(products => {
+          try {
+            resolve(products);
+          } catch (e) {
+            resolve([]);
+          }
+        }))
+    }
 }
 
 export default new ProductService();
