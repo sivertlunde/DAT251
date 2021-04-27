@@ -23,7 +23,7 @@ import no.hvl.dat251.backend.model.ProductDirectory;
 @Component
 public class FirestoreUtil {
 
-
+	@Autowired
 	Firestore firestore;
 	
 	@Autowired
