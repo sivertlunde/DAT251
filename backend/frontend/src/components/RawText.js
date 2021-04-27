@@ -1,22 +1,7 @@
 import React from 'react';
 import { withRouter } from "react-router";
-import AsyncSelect from "react-select/async"
 import ProductService from '../services/ProductService';
 
-const shopNames = ["coop", "kolonialno", "meny", "spar"]
-const PromiseOptions = input => ProductService.getProducts(input);
-
-function sum(shopName, shoppingList) {
-    let sum = 0;
-
-    if (shoppingList.length > 0) {
-      shoppingList.forEach(element => {
-        sum += element.prices[shopName];
-      });
-    }
-
-    return Math.round(sum * 100) / 100;
-}
 
 class RawText extends React.Component {
   constructor(props) {
@@ -47,14 +32,16 @@ componentDidMount() {
 }
 
 handleSubmit(event) {
-  // not sure if this should be here
   event.preventDefault();
-  if (this.state.wall != '') {
-    this.setState({
-      items: this.state.wall.split("\n")
+  
+  if (this.state.wall !== '') {
+    ProductService.productsFromRawtext(this.state.wall).then(products => {
+        this.setState({
+          shoppingList: products
+        })
+
     })
   }
-
 }
 
 handleChange(event) {
