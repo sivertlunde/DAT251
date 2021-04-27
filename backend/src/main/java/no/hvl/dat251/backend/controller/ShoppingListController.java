@@ -8,10 +8,7 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.DocumentSnapshot;
@@ -41,7 +38,9 @@ public class ShoppingListController {
 		this.firestoreUtil = firestore;
 	}
 	
-	@GetMapping("/api/shoppinglist")
+	//@GetMapping("/api/shoppinglist")
+	@PostMapping
+	@RequestMapping (value = "/api/shoppinglist", method = RequestMethod.POST, consumes = "text/plain")
     public List<Product> getProductsFromRawText(@RequestBody String list) {
 		List<Product> productList = new ArrayList<>();
 		List<String> inputText = convertRawTextToStrings(list);
