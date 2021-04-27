@@ -1,13 +1,37 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import Routes from "./Routes";
+import firebase from 'firebase';
+import { useState, useEffect } from 'react';
 
-class App extends Component {
+var config = {
+  apiKey: "AIzaSyACKQCdycUQOvW0iuRe0nmi0wg0fXakCLk",
+  authDomain: "dat251.firebaseapp.com",
+  projectId: "dat251",
+  storageBucket: "dat251.appspot.com",
+  messagingSenderId: "375043058577",
+  appId: "1:375043058577:web:0b59749814ec68c2bdc830"
 
+}
 
+firebase.initializeApp(config);
 
-  render() {
-    return (
+function App() {
+
+  const [user, setUser] = useState();
+  const [initializing, setInitializing] = useState(true);
+
+  useEffect(() => {
+    const subscriber = firebase.auth().onAuthStateChanged(
+      (_user) =>{
+        setUser(_user);
+        setInitializing(false);
+      }
+    );
+    return subscriber;
+  }, []);
+
+  return (
       <div className="App">
         <nav>
           <input type="checkbox" id="check"></input>
@@ -21,13 +45,20 @@ class App extends Component {
             <li><a href="/handleliste">Handleliste</a></li>
             <li><a href="/rawtext">Rawtext</a></li>
             <li><a href="/sammenlign">Sammenlign priser</a></li>
-            <li><a href="/logginn">Logg inn</a></li>
+            {!initializing ?
+              user ?
+                //<li className="App-link" href="/" onClick={()=> {firebase.auth().signOut();}}> Log Out</li>
+                <li><a href= "/" onClick={()=> {firebase.auth().signOut();}}> Logg ut</a></li>
+              :
+                <li><a href="/login">Logg inn</a></li>
+              :
+              <div></div>
+            }
           </ul>
         </nav>
         <Routes />
       </div>
-    );
-  }
+  );
 }
 
 export default App;
