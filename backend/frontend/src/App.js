@@ -33,7 +33,6 @@ function App() {
   
   return (
       <div className="App">
-        <a className="App-link" href = "/">handleliste</a>
         <nav>
           <input type="checkbox" id="check"></input>
           <label for="check" class="checkbtn">
